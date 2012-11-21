@@ -93,6 +93,15 @@ Configuration
    Console Application, instance `Symfony\Component\Console\Application`.
 
 
+Future
+------
+
+In the event that Pimple Service Providers become a reality, `ConsoleServiceProvider`
+will implement the appropriate interface. As soon as Cilex and Silex become Pimple
+Service Provider aware, their respective bridge classes can be bypassed and the
+core `ConsoleServiceProvider` can be used directly.
+
+
 License
 -------
 
