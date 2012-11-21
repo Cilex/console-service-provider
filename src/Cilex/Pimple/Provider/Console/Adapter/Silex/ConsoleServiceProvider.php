@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cilex\Pimple\Provider\Console\Bridge\Silex;
+namespace Cilex\Pimple\Provider\Console\Adapter\Silex;
 
 use Cilex\Pimple\Provider\Console\ConsoleServiceProvider as PimpleConsoleServiceProvider;
 use Silex\Application;

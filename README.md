@@ -93,6 +93,56 @@ Configuration
    Console Application, instance `Symfony\Component\Console\Application`.
 
 
+The Console Service Provider Application Class
+----------------------------------------------
+
+By default Console Service Provider will instantiate an instance of
+`Cilex\Pimple\Provider\Console\Application`.
+
+### Methods
+
+#### getContainer() : \Pimple
+
+Returns the Pimple container.
+
+#### getService($name) : \stdClass|null
+
+Returns a service contained in the application container or null if none
+is found with that name. Convenience method to avoid repeated calls to
+`getContainer()` or having to assign the container.
+
+
+Accessing the Container and Services from Commands
+--------------------------------------------------
+
+Here are some examples of accessing the Container and Services from a Command:
+
+```php
+<?php
+
+use Symfony\Component\Console\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class SomeCommand extends Command
+{
+    protected function configure()
+    {
+        // configure the command
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        // Direct access to the Container.
+        $container = $this->getApplication()->getContainer();
+
+        // Direct access to a service.
+        $service = $this->getApplication->getService('some.service');
+    }
+}
+```
+
+
 Future
 ------
 
