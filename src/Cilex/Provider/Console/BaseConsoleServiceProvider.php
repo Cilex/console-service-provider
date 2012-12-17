@@ -30,18 +30,14 @@ class BaseConsoleServiceProvider
         }
 
         $container['console'] = $container->share(function() use ($container) {
-            $args = array();
-            if (isset($container['console.name'])) {
-                $args[] = $container['console.name'];
-                if (isset($container['console.version'])) {
-                    $args[] = $container['console.version'];
-                }
-            }
+            $class    = $container['console.class'];
+            $instance = new $class(
+                isset($container['console.name']) ? $container['console.name'] : '',
+                isset($container['console.version']) ? $container['console.version'] : null
+            );
 
-            $class = new \ReflectionClass($container['console.class']);
-            $instance = $class->newInstanceArgs($args);
-            if ($class instanceof ContainerAwareApplication) {
-                $class->setContainer($container);
+            if ($instance instanceof ContainerAwareApplication) {
+                $instance->setContainer($container);
             }
 
             return $instance;
