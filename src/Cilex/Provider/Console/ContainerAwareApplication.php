@@ -9,32 +9,45 @@
  * file that was distributed with this source code.
  */
 
-namespace Cilex\Pimple\Provider\Console;
+namespace Cilex\Provider\Console;
 
-use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Application;
 
 /**
  * Cilex Pimple Console Application
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class Application extends BaseApplication
+class ContainerAwareApplication extends Application
 {
+    /** @var \Pimple */
+    private $container;
+
     /**
      * Constructor
      *
-     * @param \Pimple $container Pimple container
      * @param string  $name      The name of the application
      * @param string  $version   The version of the application
      */
-    public function __construct(\Pimple $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
+    public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
     {
         parent::__construct($name, $version);
+    }
+
+    /**
+     * Sets a container instance onto this application.
+     *
+     * @param \Pimple $container
+     *
+     * @return void
+     */
+    public function setContainer(\Pimple $container)
+    {
         $this->container = $container;
     }
 
     /**
-     * Get the Container
+     * Get the Container.
      *
      * @return \Pimple
      */
@@ -44,20 +57,18 @@ class Application extends BaseApplication
     }
 
     /**
-     * Returns a service contained in the application container or null if none
-     * is found with that name.
+     * Returns a service contained in the application container or null if none is found with that name.
      *
-     * This is a convenience method used to retrieve an element from the
-     * Application container without having to assign the results of the
-     * getContainer() method in every call.
+     * This is a convenience method used to retrieve an element from the Application container without having to assign
+     * the results of the getContainer() method in every call.
      *
-     * @param string $name Name of the service
+     * @param string $name Name of the service.
      *
      * @see self::getContainer()
      *
      * @api
      *
-     * @return \stdClass|null
+     * @return mixed|null
      */
     public function getService($name)
     {

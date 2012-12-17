@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Cilex\Pimple\Provider\Console;
+namespace Cilex\Provider\Console;
 
 /**
  * Pimple Console Service Provider
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class ConsoleServiceProvider
+class BaseConsoleServiceProvider
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class ConsoleServiceProvider
         }
 
         $container['console'] = $container->share(function() use ($container) {
-            $args = array($container);
+            $args = array();
             if (isset($container['console.name'])) {
                 $args[] = $container['console.name'];
                 if (isset($container['console.version'])) {
@@ -39,16 +39,20 @@ class ConsoleServiceProvider
             }
 
             $class = new \ReflectionClass($container['console.class']);
+            $instance = $class->newInstanceArgs($args);
+            if ($class instanceof ContainerAwareApplication) {
+                $class->setContainer($container);
+            }
 
-            return $class->newInstanceArgs($args);
+            return $instance;
         });
     }
 
     protected function getDefaults()
     {
         return array(
-            'console.name' => 'Pimple Application',
-            'console.class' => 'Cilex\Pimple\Provider\Console\Application',
+            'console.name' => 'Cilex Application',
+            'console.class' => 'Cilex\Provider\Console\Application',
         );
     }
 }
