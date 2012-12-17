@@ -44,7 +44,7 @@ a proxy Silex Service Provider to use the Console Service Provider.
 ```php
 <?php
 
-use Cilex\Pimple\Provider\Console\Bridge\Silex\ConsoleServiceProvider;
+use Cilex\Pimple\Provider\Console\Adapter\Silex\ConsoleServiceProvider;
 use Silex\Application;
 
 $app = new Application;
@@ -148,7 +148,7 @@ Future
 
 In the event that Pimple Service Providers become a reality, `ConsoleServiceProvider`
 will implement the appropriate interface. As soon as Cilex and Silex become Pimple
-Service Provider aware, their respective bridge classes can be bypassed and the
+Service Provider aware, their respective adapter classes can be bypassed and the
 core `ConsoleServiceProvider` can be used directly.
 
 
