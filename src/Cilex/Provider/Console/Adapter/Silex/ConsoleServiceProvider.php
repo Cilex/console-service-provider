@@ -16,7 +16,7 @@ use Silex\Application;
 use Silex\ServiceProviderInterface;
 
 /**
- * Pimple Console Service Provider
+ * Silex Console Service Provider adapter
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
