@@ -52,7 +52,7 @@ class BaseConsoleServiceProvider
     {
         return array(
             'console.name' => 'Cilex Application',
-            'console.class' => 'Cilex\Provider\Console\Application',
+            'console.class' => 'Cilex\Provider\Console\ContainerAwareApplication',
         );
     }
 }
