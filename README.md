@@ -25,26 +25,25 @@ Usage
 
 ```php
 <?php
-
-use Cilex\Pimple\Provider\Console\ConsoleServiceProvider;
+use Cilex\Provider\Console\BaseConsoleServiceProvider;
 
 $app = new Pimple;
 
-$consoleServiceProvider = new ConsoleServiceProvider;
+$consoleServiceProvider = new BaseConsoleServiceProvider;
 $consoleServiceProvider->register($app);
 
 $app['console']->run();
 ```
 
+
 ### Silex
 
-Until Pimple and Silex both support Pimple Service Providers, Silex requires
-a proxy Silex Service Provider to use the Console Service Provider.
+To use the Console Service Provider in a Silex application register the
+Console Service Provider Silex adapter.
 
 ```php
 <?php
-
-use Cilex\Pimple\Provider\Console\Adapter\Silex\ConsoleServiceProvider;
+use Cilex\Provider\Console\Adapter\Silex\ConsoleServiceProvider;
 use Silex\Application;
 
 $app = new Application;
@@ -59,11 +58,8 @@ $app['console']->run();
 
 ### Cilex
 
-Until Pimple and Cilex both support Pimple Service Providers, Cilex requires
-a proxy Cilex Service Provider to use the Console Service Provider.
-
-Cilex is a special case. The Console Service Provider is baked into the Cilex
-Application itself so there is no need to register it manually.
+The Console Service Provider is baked into the Cilex Application itself so
+there is no need to register it manually.
 
 ```php
 <?php
