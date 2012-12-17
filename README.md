@@ -29,6 +29,9 @@ use Cilex\Provider\Console\BaseConsoleServiceProvider;
 
 $app = new Pimple;
 
+$app['console.name'] = 'MyApp';
+$app['console.version'] = '1.0.5';
+
 $consoleServiceProvider = new BaseConsoleServiceProvider;
 $consoleServiceProvider->register($app);
 
