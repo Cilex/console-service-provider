@@ -51,10 +51,10 @@ use Silex\Application;
 
 $app = new Application;
 
-$app->register(new ConsoleServiceProvider(array(
+$app->register(new ConsoleServiceProvider(), array(
     'console.name' => 'MyApp',
     'console.version' => '1.0.5',
-)));
+));
 
 $app['console']->run();
 ```
