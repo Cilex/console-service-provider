@@ -59,14 +59,8 @@ $app->register(new ConsoleServiceProvider(), array(
     'console.version' => '1.0.5',
 ));
 
-$commands = array(
-    new Command\XyzInfoCommand(),
-    new Command\XyzSnapshotCommand(),
-);
-
-foreach ($commands as $command) {
-    $app['console']->add($command);
-}
+$app['console']->add(new Command\XyzInfoCommand());
+$app['console']->add(new Command\XyzSnapshotCommand());
 
 $app['console']->run();
 ```
