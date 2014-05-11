@@ -42,10 +42,13 @@ $app['console']->run();
 ### Silex
 
 To use the Console Service Provider in a Silex application register the
-Console Service Provider Silex adapter.
+Console Service Provider Silex adapter. To hook custom command-line commands
+into a Silex application add them to Cilex's container aware application 
+instance `$app['console']`.
 
 ```php
 <?php
+use Acme\Console\Command;
 use Cilex\Provider\Console\Adapter\Silex\ConsoleServiceProvider;
 use Silex\Application;
 
@@ -55,6 +58,9 @@ $app->register(new ConsoleServiceProvider(), array(
     'console.name' => 'MyApp',
     'console.version' => '1.0.5',
 ));
+
+$app['console']->add(new Command\XyzInfoCommand());
+$app['console']->add(new Command\XyzSnapshotCommand());
 
 $app['console']->run();
 ```
