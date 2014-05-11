@@ -8,15 +8,13 @@ Requirements
 ------------
 
  * PHP 5.3+
- * Symfony Console ~2.1
-
-
+ * Pimple ~2.1
+ * Symfony Console ~2.4
 
 Installation
 ------------
  
 Through [Composer][composer] as [cilex/console-service-provider][cilex/console-service-provider].
-
 
 Usage
 -----
@@ -25,31 +23,25 @@ Usage
 
 ```php
 <?php
-use Cilex\Provider\Console\BaseConsoleServiceProvider;
+use Cilex\Provider\Console\ConsoleServiceProvider;
 
-$app = new Pimple;
+$app = new Pimple\Container;
 
 $app['console.name'] = 'MyApp';
 $app['console.version'] = '1.0.5';
 
-$consoleServiceProvider = new BaseConsoleServiceProvider;
+$consoleServiceProvider = new ConsoleServiceProvider;
 $consoleServiceProvider->register($app);
 
 $app['console']->run();
 ```
 
-
 ### Silex
-
-To use the Console Service Provider in a Silex application register the
-Console Service Provider Silex adapter. To hook custom command-line commands
-into a Silex application add them to Cilex's container aware application 
-instance `$app['console']`.
 
 ```php
 <?php
 use Acme\Console\Command;
-use Cilex\Provider\Console\Adapter\Silex\ConsoleServiceProvider;
+use Cilex\Provider\Console\ConsoleServiceProvider;
 use Silex\Application;
 
 $app = new Application;
@@ -76,9 +68,10 @@ use Cilex\Application;
 
 $app = new Application('MyApp', '1.0.5');
 
+$app->command(new Command\XyzInfoCommand());
+
 $app->run();
 ```
-
 
 Configuration
 -------------
@@ -102,20 +95,19 @@ The Console Service Provider Application Class
 ----------------------------------------------
 
 By default Console Service Provider will instantiate an instance of
-`Cilex\Pimple\Provider\Console\Application`.
+`\Cilex\Provider\Console\ContainerAwareApplication`.
 
 ### Methods
 
-#### getContainer() : \Pimple
+#### getContainer() : \Pimple\Container
 
 Returns the Pimple container.
 
-#### getService($name) : \stdClass|null
+#### getService($name) : mixed|null
 
 Returns a service contained in the application container or null if none
 is found with that name. Convenience method to avoid repeated calls to
 `getContainer()` or having to assign the container.
-
 
 Accessing the Container and Services from Commands
 --------------------------------------------------
@@ -147,21 +139,10 @@ class SomeCommand extends Command
 }
 ```
 
-
-Future
-------
-
-In the event that Pimple Service Providers become a reality, `ConsoleServiceProvider`
-will implement the appropriate interface. As soon as Cilex and Silex become Pimple
-Service Provider aware, their respective adapter classes can be bypassed and the
-core `ConsoleServiceProvider` can be used directly.
-
-
 License
 -------
 
 MIT, see LICENSE.
-
 
 [symfony/console]: http://symfony.com/doc/current/components/console/introduction.html
 [pimple]: http://pimple.sensiolabs.org

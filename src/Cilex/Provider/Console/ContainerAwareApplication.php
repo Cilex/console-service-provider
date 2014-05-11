@@ -20,14 +20,14 @@ use Symfony\Component\Console\Application;
  */
 class ContainerAwareApplication extends Application
 {
-    /** @var \Pimple */
+    /** @var \Pimple\Container */
     private $container;
 
     /**
      * Constructor
      *
-     * @param string  $name      The name of the application
-     * @param string  $version   The version of the application
+     * @param string $name    The name of the application
+     * @param string $version The version of the application
      */
     public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
     {
@@ -37,11 +37,11 @@ class ContainerAwareApplication extends Application
     /**
      * Sets a container instance onto this application.
      *
-     * @param \Pimple $container
+     * @param \Pimple\Container $container
      *
      * @return void
      */
-    public function setContainer(\Pimple $container)
+    public function setContainer(\Pimple\Container $container)
     {
         $this->container = $container;
     }
@@ -49,7 +49,7 @@ class ContainerAwareApplication extends Application
     /**
      * Get the Container.
      *
-     * @return \Pimple
+     * @return \Pimple\Container
      */
     public function getContainer()
     {

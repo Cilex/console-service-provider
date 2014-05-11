@@ -4,24 +4,20 @@
     "keywords":    ["pimple", "cilex", "silex", "console", "service-provider"],
     "license":     "MIT",
     "authors": [
-        { "name":  "Mike van Riel", "email": "mike.vanriel@naenius.com" },
-        { "name": "Beau Simensen",  "email": "beau@dflydev.com" }
+        { "name": "Mike van Riel", "email": "me@mikevanriel.com" },
+        { "name": "Beau Simensen", "email": "beau@dflydev.com" }
     ],
     "require": {
         "php":             ">=5.3.3",
-        "pimple/pimple":   "1.*@dev",
-        "symfony/console": "~2.1"
-    },
-    "require-dev": {
-        "cilex/cilex": "1.*@dev",
-        "silex/silex": "1.*@dev"
+        "pimple/pimple":   "~2.1@dev",
+        "symfony/console": "~2.4"
     },
     "autoload": {
         "psr-0": { "Cilex\\Provider\\Console": "src" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }
