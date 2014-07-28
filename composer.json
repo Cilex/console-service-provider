@@ -9,7 +9,7 @@
     ],
     "require": {
         "php":             ">=5.3.3",
-        "pimple/pimple":   "~2.1@dev",
+        "pimple/pimple":   ">=2.1,<4",
         "symfony/console": "~2.4"
     },
     "autoload": {
